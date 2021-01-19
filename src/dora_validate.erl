@@ -1,5 +1,7 @@
 -module(dora_validate).
 
+-import(dora_http_uri, [parse/1]).
+
 -export([validate/2]).
 -export([format_error/1]).
 
@@ -218,7 +220,7 @@ validate_list_string(_Value) ->
 
 
 validate_http_uri(Value) ->
-    case http_uri:parse(Value) of
+    case parse(Value) of
         {ok, _Result} ->
             ok;
         {error, _Reason} ->
